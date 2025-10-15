@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Creating new text file'
+                sh '''
+                mkdir -p build
+                touch build/computer.txt
+                echo "Mainboard">> build/computer.txt
+                cat build/computer.txt
+                '''
+            }
+        }
+    }
+}
