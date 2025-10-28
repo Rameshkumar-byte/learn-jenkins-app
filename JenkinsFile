@@ -7,7 +7,7 @@ pipeline {
             steps {
               echo "This is build from git"
               dir("${WORKSPACE}/.github"){
-              ls -l
+              sh 'ls -l'
               }
                 
               
