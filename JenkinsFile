@@ -3,13 +3,26 @@ pipeline {
 
     stages {
         stage('Build') {
+          agent{
+           docker {
+          image 'node:18-alpine'
+          reuseNode true
+
+           }
+           }
+
               
             steps {
-              echo "This is build from git"
-              dir("${WORKSPACE}/.github"){
-              sh 'ls -l'
-              }
-                
+            sh '''
+            ls -la
+            node --version
+            npm --verision
+            npm ci
+            npm run build
+            ls -la
+
+            '''
+             
               
             }
         }
