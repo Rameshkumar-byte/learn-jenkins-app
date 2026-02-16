@@ -1,29 +1,22 @@
 pipeline {
-    agent any
-
+    agent {
+        docker {
+            image 'node:18-alpine'
+        }
+    }
     stages {
-        stage('Build') {
-          agent{
-           docker {
-          image 'node:18-alpine'
-          reuseNode true
-
-           }
-           }
-
-              
+        stage('Install') {
             steps {
-            sh '''
-            ls -la
-            node --version
-            npm --version
-            npm ci
-            npm run build
-            ls -la
+                sh 'rm -rf node_modules'
+                sh 'rm -f package-lock.json'
+                sh 'npm cache clean --force'
+                sh 'npm install'
+            }
+        }
 
-            '''
-             
-              
+        stage('Build') {
+            steps {
+                sh 'npm run build'
             }
         }
     }
