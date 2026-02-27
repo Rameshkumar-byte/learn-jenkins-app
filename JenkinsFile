@@ -14,7 +14,7 @@ pipeline {
               
             steps {
             sh '''
-          
+          dafdf
             ls -la
             ls -la
             ls -la
